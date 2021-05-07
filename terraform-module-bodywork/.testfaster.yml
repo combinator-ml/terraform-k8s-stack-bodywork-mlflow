@@ -98,11 +98,28 @@ base:
     # already running when you testctl get
     #!/bin/bash
     set -euo pipefail
-    #kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.45.0/deploy/static/provider/baremetal/deploy.yaml
+    git clone https://github.com/combinator-ml/terraform-k8s-stack-bodywork-mlflow
+    cd terraform-k8s-stack-bodywork-mlflow
+    git checkout 75939f9d39e1e426f81498540f0889a90f6109b3
+    cd terraform-module-bodywork
+    terraform init
+    terraform apply -auto-approve
+    # TODO: port this to terraform
+    kubectl apply -f deploy.yaml
+    bodywork setup-namespace bodywork
+    bodywork secret create \
+        --namespace=bodywork \
+        --name=mlflow-credentials \
+        --data MLFLOW_TRACKING_URI=http://mlflow.mlflow.svc.cluster.local:5000 \
+            MLFLOW_S3_ENDPOINT_URL=http://minio.mlflow.svc.cluster.local:9000 \
+            AWS_ACCESS_KEY_ID=minio \
+            AWS_SECRET_ACCESS_KEY=minio123
+
 
   # Need kube 1.17 for kubeflow last time I checked (1.18 doesn't work).
   # https://github.com/kubeflow/kubeflow/issues/5246#issuecomment-682013220
   kubernetes_version: v1.17.11
+
 runtime:
   cpus: 4
   memory: 12GB
@@ -117,3 +134,22 @@ max_pool_size: 2
 default_lease_timeout: ""
 pool_sleep_timeout: "never"
 shared: true
+
+launch:
+  title: Bodywork + MLflow
+  buttons:
+    - title: MLflow
+      port: 30600
+   #- title: Model
+   #  port: 30600 <- change this!
+  homepage: |
+    ## Follow the tutorial below
+    Click the buttons to the left to launch the MLflow web interface. See the tutorial below on how to use these to see Bodywork in action!
+
+    Try this:
+    ```
+    bodywork workflow \
+    --namespace=bodywork \
+    https://github.com/bodywork-ml/bodywork-ml-pipeline-project \
+    master
+    ```
