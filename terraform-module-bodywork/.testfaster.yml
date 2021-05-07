@@ -102,18 +102,18 @@ base:
     cd terraform-k8s-stack-bodywork-mlflow
     git checkout 426bf55cd3e4fb48a281485049099ce3bc12a53a
     cd terraform-module-bodywork
-    #terraform init
-    #terraform apply -auto-approve
-    ## TODO: port this to terraform
-    #kubectl apply -f deploy.yaml
-    #bodywork setup-namespace bodywork
-    #bodywork secret create \
-    #    --namespace=bodywork \
-    #    --name=mlflow-credentials \
-    #    --data MLFLOW_TRACKING_URI=http://mlflow.mlflow.svc.cluster.local:5000 \
-    #        MLFLOW_S3_ENDPOINT_URL=http://minio.mlflow.svc.cluster.local:9000 \
-    #        AWS_ACCESS_KEY_ID=minio \
-    #        AWS_SECRET_ACCESS_KEY=minio123
+    terraform init
+    terraform apply -auto-approve
+    # TODO: port this to terraform
+    kubectl apply -f deploy.yaml
+    bodywork setup-namespace bodywork
+    bodywork secret create \
+        --namespace=bodywork \
+        --name=mlflow-credentials \
+        --data MLFLOW_TRACKING_URI=http://mlflow.mlflow.svc.cluster.local:5000 \
+            MLFLOW_S3_ENDPOINT_URL=http://minio.mlflow.svc.cluster.local:9000 \
+            AWS_ACCESS_KEY_ID=minio \
+            AWS_SECRET_ACCESS_KEY=minio123
 
 
   # Need kube 1.17 for kubeflow last time I checked (1.18 doesn't work).
