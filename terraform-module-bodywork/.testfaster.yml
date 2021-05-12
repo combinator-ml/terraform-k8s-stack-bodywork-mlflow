@@ -11,7 +11,7 @@ base:
     RUN apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
     RUN apt install terraform -y
     RUN apt install python3-pip -y
-    RUN pip3 install bodywork==2.0.3
+    RUN pip3 install bodywork==2.0.4
   docker_bake_script: |-
     # Do things that cache docker images for faster builds,
     # like building a prior version of your software.
