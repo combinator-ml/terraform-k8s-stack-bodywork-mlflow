@@ -77,7 +77,7 @@ launch:
     Try this:
     ```
     bodywork workflow \
-    --namespace=bodywork \
-    https://github.com/bodywork-ml/bodywork-ml-pipeline-project \
-    master
+      --namespace=bodywork \
+      https://github.com/bodywork-ml/bodywork-pipeline-with-mlflow \
+      master
     ```
