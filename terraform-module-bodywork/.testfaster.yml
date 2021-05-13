@@ -28,7 +28,7 @@ base:
     set -euo pipefail
     git clone https://github.com/combinator-ml/terraform-k8s-stack-bodywork-mlflow
     cd terraform-k8s-stack-bodywork-mlflow
-    git checkout 8cbd02a63cea5ad615d8ecdecc64f4b5e6d3a817
+    git checkout d029e330a46ea1f11a4251ab045012ec7dc13a4f
     cd terraform-module-bodywork
     terraform init
     terraform apply -auto-approve
