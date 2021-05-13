@@ -5,7 +5,7 @@ base:
     # This dockerfile defines the base disk image for your VMs
     FROM quay.io/testfaster/kube-ubuntu
     ENV bump-cache 1
-    RUN apt update
+    RUN apt-get update
     RUN apt install gnupg2 software-properties-common rsync -y
     RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
     RUN apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
