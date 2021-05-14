@@ -39,9 +39,10 @@ base:
         --namespace=bodywork \
         --name=mlflow-credentials \
         --data MLFLOW_TRACKING_URI=http://mlflow.mlflow.svc.cluster.local:5000 \
-            MLFLOW_S3_ENDPOINT_URL=http://minio.mlflow.svc.cluster.local:9000 \
-            AWS_ACCESS_KEY_ID=minio \
-            AWS_SECRET_ACCESS_KEY=minio123
+               MLFLOW_S3_ENDPOINT_URL=http://minio.mlflow.svc.cluster.local:9000 \
+               AWS_ACCESS_KEY_ID=minio \
+               AWS_SECRET_ACCESS_KEY=minio123 \
+               AWS_DEFAULT_REGION=us-east-1
 
 
   # Need kube 1.17 for kubeflow last time I checked (1.18 doesn't work).
